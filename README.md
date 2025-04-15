@@ -1,54 +1,53 @@
-# React + TypeScript + Vite
+# Рулетка Зависимостей
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Интерактивный веб-проект, демонстрирующий последствия курения в формате CS:GO-подобной рулетки. Открывая кейсы, пользователи "выигрывают" различные заболевания и осложнения, связанные с курением.
 
-Currently, two official plugins are available:
+## Описание
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Проект создан с целью наглядно показать разрушительные последствия курения для здоровья человека. В игровой форме демонстрируются реальные риски, с которыми сталкиваются курильщики:
 
-## Expanding the ESLint configuration
+- Различные виды рака
+- Сердечно-сосудистые заболевания
+- Проблемы с репродуктивным здоровьем
+- Преждевременное старение
+- И многие другие серьезные заболевания
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ⚠️ Предупреждение
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+**Я категорически осуждаю курение и призываю всех отказаться от этой смертельной привычки!**
+
+Курение:
+
+- Убивает тысячи людей ежедневно
+- Вызывает тяжелую зависимость
+- Приводит к необратимым последствиям для здоровья
+- Влияет на здоровье окружающих (пассивное курение)
+- Наносит серьезный ущерб экологии
+
+## Технологии
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+
+## Запуск проекта
+
+```bash
+# Установка зависимостей
+npm install
+
+# Запуск в режиме разработки
+npm run dev
+
+# Сборка проекта
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Лицензия
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+MIT
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+_Помните: каждая сигарета сокращает вашу жизнь. Берегите себя и своих близких!_
