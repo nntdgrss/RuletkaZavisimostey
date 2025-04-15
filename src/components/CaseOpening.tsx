@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   CASE_ITEMS,
   RARITY_CHANCES,
@@ -61,12 +61,13 @@ export default function CaseOpening({ onClose }: Props) {
   const [spinItems, setSpinItems] = useState<CaseItem[]>([]);
   const [winningItem, setWinningItem] = useState<CaseItem | null>(null);
   const [showResult, setShowResult] = useState(false);
-  const [isSoundEnabled, setIsSoundEnabled] = useState(true);
+  const isSoundEnabled = useRef(true);
+  const [soundIconEnabled, setSoundIconEnabled] = useState(true);
 
   const SPIN_DURATION = 6800; // 6.8 секунд для прокрутки
 
   const startSpin = useCallback(() => {
-    if (isSoundEnabled) {
+    if (isSoundEnabled.current) {
       sounds.playSpinning();
     }
     const items = generateSpinItems();
@@ -80,14 +81,14 @@ export default function CaseOpening({ onClose }: Props) {
 
     // Останавливаем звук прокрутки за 1.2 секунды до конца
     setTimeout(() => {
-      if (isSoundEnabled) {
+      if (isSoundEnabled.current) {
         sounds.stopSpinning();
       }
     }, SPIN_DURATION - 1200);
 
     // За 0.8 секунды до конца начинаем замедление
     setTimeout(() => {
-      if (isSoundEnabled) {
+      if (isSoundEnabled.current) {
         sounds.playWin();
       }
     }, SPIN_DURATION - 800);
@@ -107,7 +108,7 @@ export default function CaseOpening({ onClose }: Props) {
     setTimeout(() => {
       setShowResult(true);
     }, SPIN_DURATION);
-  }, [isSoundEnabled]);
+  }, []);
 
   useEffect(() => {
     startSpin();
@@ -117,10 +118,18 @@ export default function CaseOpening({ onClose }: Props) {
     <div className="fixed inset-0 z-50">
       <div className="absolute top-5 right-5 z-50">
         <button
-          onClick={() => setIsSoundEnabled(!isSoundEnabled)}
+          onClick={() => {
+            isSoundEnabled.current = !isSoundEnabled.current;
+            setSoundIconEnabled(isSoundEnabled.current);
+            if (!isSoundEnabled.current && spinning) {
+              sounds.stopSpinning();
+            } else if (isSoundEnabled.current && spinning) {
+              sounds.playSpinning();
+            }
+          }}
           className="bg-zinc-800/50 p-3 rounded-full hover:bg-zinc-700/50 transition-colors"
         >
-          {isSoundEnabled ? (
+          {soundIconEnabled ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-6 h-6 text-white"
